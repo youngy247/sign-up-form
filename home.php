@@ -25,5 +25,9 @@ if(!isset($_SESSION['username'])){
 <h1 class="text-center text-warning mt-5">Welcome
 <?php echo $_SESSION['username']; ?>
 </h1>
+
+<div class="container">
+    <a href="logout.php" class="btn btn-primary mt-5">Logout</a>
+</div>
 </body>
 </html>
