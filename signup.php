@@ -14,6 +14,7 @@
 
 </head>
 <body>
+<h1 class="text-center">Sign up form</h1>
     <div class="container mt-5">
         <form>
             <div class="form-group">
