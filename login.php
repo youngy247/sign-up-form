@@ -1,5 +1,6 @@
 <?php
-
+$login = 0;
+$invalid = 0;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include 'connect.php';
     $pdo = connectToDb($DB);
@@ -11,10 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
-        echo "Login successful";
+        $login=1;
 
     } else {
-        echo "Invalid data";
+        $invalid = 1;
     }
 }
 ?>
@@ -37,6 +38,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 </head>
 <body>
+<?php
+if($login){
+echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Success </strong> You are successfully logged in!
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>';
+}
+?>
+<?php
+if($invalid){
+echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error </strong> Invalid credentials
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>';
+}
+?>
 
 <h1 class="text-center">Login to our website</h1>
 <div class="container mt-5">
