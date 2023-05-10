@@ -22,7 +22,7 @@ if(!isset($_SESSION['username'])){
 
 </head>
 <body>
-<h1>Welcome
+<h1 class="text-center text-warning mt-5">Welcome
 <?php echo $_SESSION['username']; ?>
 </h1>
 </body>
