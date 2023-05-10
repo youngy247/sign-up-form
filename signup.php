@@ -14,7 +14,7 @@
 
 </head>
 <body>
-    <div class="container">
+    <div class="container mt-5">
         <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
@@ -24,7 +24,7 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" placeholder="Enter your password" name="password">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
     </div>
 
