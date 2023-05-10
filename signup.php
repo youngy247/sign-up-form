@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
-//        echo "User already exists";
         $user = 1;
     } else {
         $sql = "insert into `registration`(username,password)
@@ -21,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = $pdo->prepare($sql);
         $result = $stmt->execute();
         if($result){
-//            echo "Signup successful";
             $success = 1;
         }else{
             die($stmt->errorInfo()[2]);
@@ -86,7 +84,7 @@ if($success){
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" placeholder="Enter your password" name="password">
         </div>
-        <button type="submit" class="btn btn-primary w-100">Submit</button>
+        <button type="submit" class="btn btn-primary w-100">Sign up</button>
     </form>
 </div>
 
