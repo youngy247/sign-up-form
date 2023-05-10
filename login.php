@@ -13,7 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute();
     if ($stmt->rowCount() > 0) {
         $login=1;
-
+        session_start();
+        $_SESSION['username']=$username;
+        header('location:home.php');
     } else {
         $invalid = 1;
     }
