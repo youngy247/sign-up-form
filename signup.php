@@ -16,7 +16,7 @@
 <body>
 <h1 class="text-center">Sign up form</h1>
     <div class="container mt-5">
-        <form>
+        <form action="signup.php" method="post">
             <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input type="email" class="form-control" placeholder="Enter your username" name="username">
