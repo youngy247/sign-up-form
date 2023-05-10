@@ -1,12 +1,14 @@
 <?php
 $success = 0;
 $user = 0;
+$invalid = 0;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     include 'connect.php';
     $pdo = connectToDb($DB);
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $cpassword=$_POST['cpassword'];
 
     $sql = "Select * from `registration` where username='$username'";
 
@@ -15,17 +17,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($stmt->rowCount() > 0) {
         $user = 1;
     } else {
-        $sql = "insert into `registration`(username,password)
+        if ($password === $cpassword) {
+            $sql = "insert into `registration`(username,password)
         values('$username', '$password')";
-        $stmt = $pdo->prepare($sql);
-        $result = $stmt->execute();
-        if($result){
-            $success = 1;
-            header('location:login.php');
-        }else{
-            die($stmt->errorInfo()[2]);
+            $stmt = $pdo->prepare($sql);
+            $result = $stmt->execute();
+            if ($result) {
+                $success = 1;
+                header('location:login.php');
+            }
+        } else {
+                $invalid = 1;
+            }
         }
-    }
+
 }
 ?>
 
@@ -62,6 +67,18 @@ if($user){
 
 <?php
 
+if($invalid){
+    echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>Ohh no Sorry </strong> Password did not match
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>';
+}
+?>
+
+<?php
+
 if($success){
     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
   <strong>Success </strong> You are successfully signed up!
@@ -81,6 +98,10 @@ if($success){
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" placeholder="Enter your password" name="password">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Confirm Password</label>
+            <input type="password" class="form-control" placeholder="Confirm Password" name="cpassword">
         </div>
         <button type="submit" class="btn btn-primary w-100">Sign up</button>
     </form>
