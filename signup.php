@@ -21,14 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = $stmt->execute();
         if($result){
             $success = 1;
+            header('location:login.php');
         }else{
             die($stmt->errorInfo()[2]);
         }
     }
 }
-
-
-
 ?>
 
 
