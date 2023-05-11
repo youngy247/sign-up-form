@@ -18,8 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = 1;
     } else {
         if ($password === $cpassword) {
-            $sql = "insert into `registration`(username,password)
-        values('$username', '$password')";
+            $options = ['cost' => 12];
+            $hashed_password = password_hash($password, PASSWORD_BCRYPT, $options);
+            $sql = "insert into `registration`(username,password) values('$username', '$hashed_password')";
+
             $stmt = $pdo->prepare($sql);
             $result = $stmt->execute();
             if ($result) {
