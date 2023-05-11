@@ -7,11 +7,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "Select * from `registration` where username='$username' and password='$password'";
+    $sql = "SELECT password FROM `registration` WHERE username=:username";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    if ($stmt->rowCount() > 0) {
+    $stmt->execute(['username' => $username]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($row && password_verify($password, $row['password'])) {
         $login=1;
         session_start();
         $_SESSION['username']=$username;
